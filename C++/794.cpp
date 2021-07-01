@@ -9,6 +9,7 @@ public:
             }
         }
         printf("%d %d\n",x,y);
+        //only when x==y or X_num-O_num==1 ,it may be true;
         if((x!=y)&&(x!=y+1))return false;
         int k=0,h=0;
         if(board[0][0]==board[0][1]&&board[0][1]==board[0][2]){k+=board[0][0]=='O';h+=board[0][0]=='X';}
@@ -20,9 +21,9 @@ public:
         if(board[0][0]==board[1][1]&&board[1][1]==board[2][2]){k+=board[1][1]=='O';h+=board[1][1]=='X';}
         if(board[2][0]==board[0][2]&&board[2][0]==board[1][1]){k+=board[1][1]=='O';h+=board[1][1]=='X';}
         printf("%d %d\n",k,h);
-        if(k*h!=0)return false;printf("1\n");
-        if(x==y)if(h!=0)return false;printf("1\n");
-        if(x==y+1)if(k!=0)return false;printf("1\n");
+        if(k*h!=0)return false;//if all f O and X win ,it must be false
+        if(h!=0&&x==y)return false;//if X wins,the X must be the last, so X-O==1 
+        if(k!=0&&x==y+1)return false;//if O wins,the O must be the last, so X-O==0 
         return true;
     }
 };
