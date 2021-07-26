@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool findWhetherExistsPath(int n, vector<vector<int>>& graph, int start, int target) {  
+        vector<vector<int>> m(n);
+        for(int i=0;i<graph.size();i++){
+            m[graph[i][0]].push_back(graph[i][1]);
+        }
+        vector<bool> visit(n,false);
+        queue<int> q={};
+        q.push(start);
+        while(!q.empty()){
+            int x=q.front();
+            q.pop();
+            if(x==target)return true;
+            visit[x]=true;
+            for(auto b :m[x]){
+                if(!visit[b]){
+                    q.push(b);
+                }
+            }
+        }
+        return false;
+    }
+};
